@@ -1,4 +1,4 @@
-# EngComp-UNIVESP
+# Engenharia da Computação-UNIVESP
 
 ## Descrição
 Este repositório é dedicado ao armazenamento de todo o conteúdo do curso de Engenharia de Computação da UNIVESP. 

@@ -1,6 +1,27 @@
 const isInPages = window.location.pathname.includes('/pages/');
 const basePath = isInPages ? '../' : '';
 
+function initTheme() {
+    const savedTheme = localStorage.getItem('theme');
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const theme = savedTheme || (prefersDark ? 'dark' : 'light');
+    document.documentElement.setAttribute('data-theme', theme);
+}
+
+function toggleTheme() {
+    const currentTheme = document.documentElement.getAttribute('data-theme');
+    const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+    document.documentElement.setAttribute('data-theme', newTheme);
+    localStorage.setItem('theme', newTheme);
+}
+
+function setupThemeToggle() {
+    const toggleBtn = document.getElementById('theme-toggle');
+    if (toggleBtn) {
+        toggleBtn.addEventListener('click', toggleTheme);
+    }
+}
+
 const navItems = [
     { href: basePath + 'index.html', label: 'Início' },
     { href: basePath + 'pages/semestre1.html', label: '1º Semestre' },
@@ -61,6 +82,8 @@ async function loadFooter() {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
+    initTheme();
     loadHeader();
     loadFooter();
+    setupThemeToggle();
 });
